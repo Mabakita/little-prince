@@ -1,2 +1,13 @@
+# הנסיך הקטן – אתר לימודי
+
+אתר לימודי בעברית על הספר **הנסיך הקטן** מאת אנטואן דה סנט-אכזופרי.
+
+האתר מציע פעילויות לימודיות פרק-פרק, המאפשרות לתלמידים לחקור את הספר הנצחי דרך שאלות, תרגילים וגילויים.
+
+---
+
 # little-prince-edu
-An interactive learning journey inspired by The Little Prince. Exploring the timeless classic through chapter-by-chapter inquiry, activities, and discoveries.
+
+A Hebrew educational website about **The Little Prince** by Antoine de Saint-Exupéry.
+
+The site offers chapter-by-chapter learning activities, allowing students to explore the timeless classic through inquiry, exercises, and discoveries.
