@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" fill="none">
+  <!-- ראש -->
+  <circle cx="98" cy="56" r="24" fill="#fdf6e6" stroke="#4a3826" stroke-width="2.2"/>
+  <!-- כובע טייס -->
+  <path d="M74,52 C71,30 84,18 98,18 C112,18 125,30 122,52
+           C119,42 110,34 98,34 C86,34 77,42 74,52 Z"
+        fill="#c9a06a" fill-opacity="0.55" stroke="#4a3826" stroke-width="2.2" stroke-linejoin="round"/>
+  <rect x="66" y="48" width="12" height="20" rx="5" fill="#c9a06a" fill-opacity="0.55" stroke="#4a3826" stroke-width="1.8"/>
+  <rect x="120" y="48" width="12" height="20" rx="5" fill="#c9a06a" fill-opacity="0.55" stroke="#4a3826" stroke-width="1.8"/>
+  <!-- משקפי טייס -->
+  <circle cx="88" cy="54" r="9" fill="#a9cbd6" fill-opacity="0.35" stroke="#4a3826" stroke-width="2"/>
+  <circle cx="107" cy="54" r="9" fill="#a9cbd6" fill-opacity="0.35" stroke="#4a3826" stroke-width="2"/>
+  <line x1="97" y1="54" x2="98" y2="54" stroke="#4a3826" stroke-width="2"/>
+  <line x1="79" y1="50" x2="70" y2="46" stroke="#4a3826" stroke-width="1.6"/>
+  <line x1="116" y1="50" x2="126" y2="46" stroke="#4a3826" stroke-width="1.6"/>
+  <!-- מעיל -->
+  <path d="M68,78 C62,118 60,158 63,198 L133,198 C136,158 134,118 128,78 Z"
+        fill="#c9a06a" fill-opacity="0.45" stroke="#4a3826" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M84,80 L92,96 L98,82 L104,96 L112,80" stroke="#4a3826" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
+  <!-- זרוע מחזיקה מזוודה -->
+  <path d="M66,96 C50,120 40,150 36,182" stroke="#4a3826" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- רגליים -->
+  <rect x="72" y="198" width="14" height="60" fill="#4a3826" fill-opacity="0.12" stroke="#4a3826" stroke-width="2"/>
+  <rect x="112" y="198" width="14" height="60" fill="#4a3826" fill-opacity="0.12" stroke="#4a3826" stroke-width="2"/>
+  <ellipse cx="79" cy="264" rx="13" ry="8" fill="#4a3826" fill-opacity="0.3" stroke="#4a3826" stroke-width="2"/>
+  <ellipse cx="119" cy="264" rx="13" ry="8" fill="#4a3826" fill-opacity="0.3" stroke="#4a3826" stroke-width="2"/>
+  <!-- מזוודה -->
+  <rect x="14" y="178" width="50" height="38" rx="5" fill="#c9a06a" fill-opacity="0.65" stroke="#4a3826" stroke-width="2.2"/>
+  <path d="M30,178 C30,170 48,170 48,178" stroke="#4a3826" stroke-width="2.2" fill="none"/>
+  <line x1="14" y1="196" x2="64" y2="196" stroke="#4a3826" stroke-width="1.4"/>
+  <line x1="34" y1="178" x2="34" y2="216" stroke="#4a3826" stroke-width="1.2" stroke-opacity="0.6"/>
+</svg>

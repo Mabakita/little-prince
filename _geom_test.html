@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הנסיך הקטן - אתר לימודי</title>
+<meta name="description" content="אתר לימודי בעברית על ספרו של אנטואן דה סנט-אכזופרי 'הנסיך הקטן', לתלמידי כיתות ד-ו ולמורים המלמדים אותו.">
+<link rel="stylesheet" href="css/style.css">
+<script>
+window.addEventListener('load', function() {
+  setTimeout(function(){
+    var hero = document.querySelector('.hero');
+    var title = document.querySelector('.hero-title');
+    var subtitle = document.querySelector('.hero__subtitle');
+    var intro = document.querySelector('.hero__intro');
+    var prince = document.querySelector('.hero__prince');
+    var container = document.querySelector('.chapters-section .container');
+    var card = document.querySelector('.chapter-card');
+    function r(el){ if(!el) return null; var b=el.getBoundingClientRect(); return {top:Math.round(b.top), bottom:Math.round(b.bottom), height:Math.round(b.height)}; }
+    var out = {win:[window.innerWidth, window.innerHeight], hero:r(hero), title:r(title), subtitle:r(subtitle), intro:r(intro), prince:r(prince), container:r(container), card:r(card)};
+    var d = document.createElement('pre');
+    d.id = 'geomresult';
+    d.textContent = JSON.stringify(out);
+    document.body.appendChild(d);
+  }, 300);
+});
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      הנסיך הקטן
+      <span class="nav__logo-star">&#10022;</span>
+    </a>
+    <button class="nav__toggle" aria-label="פתח תפריט" aria-expanded="false">&#9776;</button>
+    <ul class="nav__links">
+      <li><a href="index.html" class="active">בית</a></li>
+      <li><a href="chapters/chapter-01.html">הפרקים</a></li>
+      <li><a href="about.html">אודות</a></li>
+      <li>
+        <select class="nav__chapter-select" aria-label="עבור לפרק">
+          <option value="">עבור/י לפרק...</option>
+          <option value="chapters/chapter-01.html">פרק 1 - נחש הבואה</option>
+          <option value="" disabled>פרק 2 - המפגש בסהרה וציור הכבשה (בקרוב)</option>
+          <option value="" disabled>פרק 3 - הכוכב הזעיר שלו (בקרוב)</option>
+          <option value="" disabled>פרק 4 - האסטרונום הטורקי (בקרוב)</option>
+          <option value="" disabled>פרק 5 - עצי הבאובב (בקרוב)</option>
+          <option value="" disabled>פרק 6 - ארבעים וארבע שקיעות (בקרוב)</option>
+          <option value="" disabled>פרק 7 - קוצים ושושנים (בקרוב)</option>
+          <option value="" disabled>פרק 8 - השושנה הגנדרנית (בקרוב)</option>
+          <option value="" disabled>פרק 9 - הפרידה מהשושנה (בקרוב)</option>
+          <option value="" disabled>פרק 10 - המלך (בקרוב)</option>
+          <option value="" disabled>פרק 11 - השחצן (בקרוב)</option>
+          <option value="" disabled>פרק 12 - השיכור (בקרוב)</option>
+          <option value="" disabled>פרק 13 - איש העסקים (בקרוב)</option>
+          <option value="" disabled>פרק 14 - מדליק הפנסים (בקרוב)</option>
+          <option value="" disabled>פרק 15 - הגיאוגרף (בקרוב)</option>
+          <option value="" disabled>פרק 16 - כדור הארץ (בקרוב)</option>
+          <option value="" disabled>פרק 17 - הנחש בסהרה ושיח על בדידות (בקרוב)</option>
+          <option value="" disabled>פרק 18 - הפרח בעל שלושת העלים (בקרוב)</option>
+          <option value="" disabled>פרק 19 - ההר וההד (בקרוב)</option>
+          <option value="" disabled>פרק 20 - גן השושנים (בקרוב)</option>
+          <option value="" disabled>פרק 21 - השועל (בקרוב)</option>
+          <option value="" disabled>פרק 22 - פקיד הרכבת (בקרוב)</option>
+          <option value="" disabled>פרק 23 - הרוכל (בקרוב)</option>
+          <option value="" disabled>פרק 24 - הבאר (בקרוב)</option>
+          <option value="" disabled>פרק 25 - דלי המים (בקרוב)</option>
+          <option value="" disabled>פרק 26 - הפרידה מן הנחש (בקרוב)</option>
+          <option value="" disabled>פרק 27 - מבט אל הכוכבים (בקרוב)</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <img src="images/prince.png" class="hero__prince" alt="איור הנסיך הקטן יושב על כוכב הלכת הקטן שלו">
+  <div class="hero__content">
+    <div class="ornament">
+      <span class="ornament__line"></span>
+      <span class="ornament__star">&#10022;</span>
+      <span class="ornament__line"></span>
+    </div>
+    <h1 class="hero-title">הנסיך הקטן</h1>
+    <p class="hero__subtitle">מסע לימודי בין הכוכבים</p>
+    <p class="hero__intro">
+      "הדברים החשובים באמת סמויים מן העין" - כך לימד אותנו השועל החכם. באתר הזה יוצאים תלמידות ותלמידי כיתות ד'-ו' למסע קריאה
+      בעקבות ספרו הנצחי של אנטואן דה סנט-אכזופרי, פרק אחר פרק - עם תקצירים, שאלות למחשבה ופעילויות יצירתיות ורב-תחומיות
+      שמשלבות אומנות, מדע, פילוסופיה והיסטוריה. האתר נבנה מתוך ניסיון הוראה אמיתי בכיתה, ומיועד לשימוש חופשי גם על ידי מורים אחרים.
+    </p>
+  </div>
+</section>
+
+<section class="chapters-section">
+<div class="container">
+  <div class="ornament ornament--dots">
+    <span class="ornament__dot"></span>
+    <span class="ornament__line"></span>
+    <span class="ornament__star">&#10022;</span>
+    <span class="ornament__line"></span>
+    <span class="ornament__dot"></span>
+  </div>
+
+  <div class="chapters-grid">
+
+    <a href="chapters/chapter-01.html" class="chapter-card active">
+      <span class="chapter-card__num">פרק 1</span>
+        <img src="images/menu/1.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">נחש הבואה</span>
+    </a>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 2</span>
+        <img src="images/menu/2.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">המפגש בסהרה וציור הכבשה</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 3</span>
+        <img src="images/menu/3.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">הכוכב הזעיר שלו</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 4</span>
+        <img src="images/menu/4.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">האסטרונום הטורקי</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 5</span>
+        <img src="images/menu/5.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">עצי הבאובב</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 6</span>
+        <img src="images/menu/6.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">ארבעים וארבע שקיעות</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 7</span>
+        <img src="images/menu/7.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">קוצים ושושנים</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 8</span>
+        <img src="images/menu/8.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">השושנה הגנדרנית</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 9</span>
+        <img src="images/menu/9.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">הפרידה מהשושנה</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 10</span>
+        <img src="images/menu/10.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">המלך</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 11</span>
+        <img src="images/menu/11.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">השחצן</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 12</span>
+        <img src="images/menu/12.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">השיכור</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 13</span>
+        <img src="images/menu/13.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">איש העסקים</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 14</span>
+        <img src="images/menu/14.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">מדליק הפנסים</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 15</span>
+        <img src="images/menu/15.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">הגיאוגרף</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 16</span>
+        <img src="images/menu/16.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">כדור הארץ</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 17</span>
+        <img src="images/menu/17.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">הנחש בסהרה ושיח על בדידות</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 18</span>
+        <img src="images/menu/18.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">הפרח בעל שלושת העלים</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 19</span>
+        <img src="images/menu/19.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">ההר וההד</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 20</span>
+        <img src="images/menu/20.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">גן השושנים</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 21</span>
+        <img src="images/menu/21.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">השועל</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 22</span>
+        <img src="images/menu/22.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">פקיד הרכבת</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 23</span>
+        <img src="images/menu/23.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">הרוכל</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 24</span>
+        <img src="images/menu/24.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">הבאר</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 25</span>
+        <img src="images/menu/25.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">דלי המים</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 26</span>
+        <img src="images/menu/26.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">הפרידה מן הנחש</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+    <div class="chapter-card disabled">
+      <span class="chapter-card__num">פרק 27</span>
+        <img src="images/menu/27.png" class="chapter-card__icon" alt="" loading="lazy">
+      <span class="chapter-card__dot">&#10022;</span>
+      <span class="chapter-card__title">מבט אל הכוכבים (אפילוג)</span>
+      <span class="chapter-card__badge">בקרוב</span>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<footer class="site-footer">
+  <p>אתר לימודי בהשראת "הנסיך הקטן" מאת אנטואן דה סנט-אכזופרי &middot; נבנה על ידי מורה, עבור מורים ותלמידים &middot; <a href="about.html">אודות הפרויקט</a></p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

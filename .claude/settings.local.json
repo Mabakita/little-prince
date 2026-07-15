@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(pkill -f \"Google Chrome\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --window-size=1400,1600 --virtual-time-budget=5000 --run-all-compositor-stages-before-draw --dump-dom \"file://$\\(pwd\\)/_geom_test.html\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --window-size=800,1600 --virtual-time-budget=5000 --run-all-compositor-stages-before-draw --dump-dom \"file://$\\(pwd\\)/_geom_test.html\")",
+      "Bash(open \"/Users/inbaltal/פרוייקטים/little-prince-site/index.html\")"
+    ],
+    "additionalDirectories": [
+      "/Users/inbaltal/פרוייקטים/little-prince-site"
+    ]
+  }
+}

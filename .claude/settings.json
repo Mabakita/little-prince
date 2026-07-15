@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"/private/tmp/claude-501/-Users-inbaltal-----------little-prince-site/0d69f2d0-5e95-4427-8ed4-a36ce8578324/scratchpad/final4.png\" --window-size=1400,1600 \"file://$\\(pwd\\)/index.html\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"/private/tmp/claude-501/-Users-inbaltal-----------little-prince-site/0d69f2d0-5e95-4427-8ed4-a36ce8578324/scratchpad/check_prince.png\" --window-size=1400,1600 \"file://$\\(pwd\\)/index.html\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --window-size=1800,1600 --virtual-time-budget=5000 --run-all-compositor-stages-before-draw --dump-dom \"file://$\\(pwd\\)/_geom_test.html\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"/private/tmp/claude-501/-Users-inbaltal-----------little-prince-site/0d69f2d0-5e95-4427-8ed4-a36ce8578324/scratchpad/v15_check.png\" --window-size=1400,1600 \"file://$\\(pwd\\)/index.html\")",
+      "Bash(sips -g pixelWidth -g pixelHeight images/bg2.png)",
+      "Bash(open -a \"Google Chrome\" \"/Users/inbaltal/פרוייקטים/little-prince-site/index.html\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"/private/tmp/claude-501/-Users-inbaltal-----------little-prince-site/e9153eec-fa82-4fc5-8e65-31a6fb834ff8/scratchpad/desktop-1440.png\" --window-size=1440,1000 --hide-scrollbars \"file:///Users/inbaltal/פרוייקטים/little-prince-site/index.html\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"/private/tmp/claude-501/-Users-inbaltal-----------little-prince-site/e9153eec-fa82-4fc5-8e65-31a6fb834ff8/scratchpad/mobile-390.png\" --window-size=390,900 --hide-scrollbars \"file:///Users/inbaltal/פרוייקטים/little-prince-site/index.html\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"/private/tmp/claude-501/-Users-inbaltal-----------little-prince-site/e9153eec-fa82-4fc5-8e65-31a6fb834ff8/scratchpad/chapter-1440.png\" --window-size=1440,1200 --hide-scrollbars \"file:///Users/inbaltal/פרוייקטים/little-prince-site/chapters/chapter-01.html\")"
+    ]
+  }
+}

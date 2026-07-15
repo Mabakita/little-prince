@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 170" fill="none">
+  <!-- גוף הנחש -->
+  <path d="M18,95 C16,78 28,66 48,66 C85,66 108,50 148,50 C190,50 212,36 234,50
+           C252,61 254,82 244,96 C258,102 260,118 248,128 C228,144 206,126 166,126
+           C124,126 100,142 62,136 C36,132 20,116 18,95 Z"
+        fill="#c8d9a0" fill-opacity="0.45" stroke="#4a3826" stroke-width="2.4" stroke-linejoin="round"/>
+  <!-- עין -->
+  <circle cx="245" cy="60" r="2.4" fill="#4a3826"/>
+  <!-- לשון -->
+  <path d="M256,58 C264,54 270,56 274,52" stroke="#4a3826" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <!-- הפיל בתוך הבטן -->
+  <g>
+    <ellipse cx="150" cy="92" rx="42" ry="24" fill="#cdc3ae" fill-opacity="0.55" stroke="#4a3826" stroke-width="1.8"/>
+    <path d="M115,88 C100,82 92,88 90,100 C96,96 104,96 110,100" fill="#cdc3ae" fill-opacity="0.55" stroke="#4a3826" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M186,96 C196,100 202,112 198,124 C194,116 188,112 182,110" fill="none" stroke="#4a3826" stroke-width="2.2" stroke-linecap="round"/>
+    <line x1="128" y1="114" x2="126" y2="126" stroke="#4a3826" stroke-width="3" stroke-linecap="round"/>
+    <line x1="144" y1="116" x2="143" y2="128" stroke="#4a3826" stroke-width="3" stroke-linecap="round"/>
+    <line x1="160" y1="116" x2="160" y2="128" stroke="#4a3826" stroke-width="3" stroke-linecap="round"/>
+    <line x1="174" y1="112" x2="176" y2="124" stroke="#4a3826" stroke-width="3" stroke-linecap="round"/>
+    <path d="M108,84 C110,80 116,79 118,82" stroke="#4a3826" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

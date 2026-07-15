@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>מציג PDF</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f8efe3;
+        --ink: #2f241d;
+        --gold-deep: #8b5e1d;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .viewer {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        min-height: 100vh;
+        padding: 0.9rem;
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.7rem;
+        flex-wrap: wrap;
+      }
+
+      .toolbar button {
+        border: none;
+        border-radius: 999px;
+        padding: 0.55rem 0.9rem;
+        background: rgba(139, 94, 29, 0.16);
+        color: var(--gold-deep);
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .toolbar button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .page-status {
+        font-size: 0.95rem;
+      }
+
+      .canvas-wrap {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(47, 36, 29, 0.12);
+        border-radius: 12px;
+        padding: 0.75rem;
+        overflow: auto;
+      }
+
+      canvas {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(47, 36, 29, 0.12);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="viewer">
+      <div class="toolbar">
+        <button id="prev">← קודם</button>
+        <span id="page-status" class="page-status">טוען PDF…</span>
+        <button id="next">הבא →</button>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="pdf-canvas"></canvas>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const pdfUrl = params.get('file');
+      const canvas = document.getElementById('pdf-canvas');
+      const pageStatus = document.getElementById('page-status');
+      const prevButton = document.getElementById('prev');
+      const nextButton = document.getElementById('next');
+
+      if (!pdfUrl) {
+        pageStatus.textContent = 'לא סופק קובץ PDF';
+      } else {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        let currentPage = 1;
+        let pdfDoc = null;
+
+        const renderPage = async () => {
+          if (!pdfDoc) return;
+          const page = await pdfDoc.getPage(currentPage);
+          const viewport = page.getViewport({ scale: 1.2 });
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          const context = canvas.getContext('2d');
+          await page.render({ canvasContext: context, viewport }).promise;
+          pageStatus.textContent = `עמוד ${currentPage} מתוך ${pdfDoc.numPages}`;
+          prevButton.disabled = currentPage <= 1;
+          nextButton.disabled = currentPage >= pdfDoc.numPages;
+        };
+
+        prevButton.addEventListener('click', () => {
+          if (currentPage > 1) {
+            currentPage -= 1;
+            renderPage();
+          }
+        });
+
+        nextButton.addEventListener('click', () => {
+          if (pdfDoc && currentPage < pdfDoc.numPages) {
+            currentPage += 1;
+            renderPage();
+          }
+        });
+
+        window.pdfjsLib.getDocument({
+          url: decodeURIComponent(pdfUrl),
+          cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+          cMapPacked: true
+        }).promise.then((pdf) => {
+          pdfDoc = pdf;
+          renderPage();
+        }).catch(() => {
+          pageStatus.textContent = 'לא ניתן להציג את ה-PDF';
+        });
+      }
+    </script>
+  </body>
+</html>
