@@ -5,9 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>אודות - הנסיך הקטן</title>
 <meta name="description" content="על הפרויקט הלימודי סביב ספרו של אנטואן דה סנט-אכזופרי, הנסיך הקטן.">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=20260716-4">
+<style>
+  .page-cream .about-hero__illustration {
+    height: clamp(210px, 28vw, 336px) !important;
+    max-width: min(92%, 392px) !important;
+    margin-bottom: 0.6rem !important;
+  }
+
+  .page-cream .chapter-banner + main.about-page {
+    margin-top: calc(0.6rem - 1cm) !important;
+  }
+</style>
 </head>
-<body>
+<body class="page-cream">
 
 <header class="site-header">
   <nav class="nav">
@@ -18,8 +29,8 @@
     <button class="nav__toggle" aria-label="פתח תפריט" aria-expanded="false">&#9776;</button>
     <ul class="nav__links">
       <li><a href="index.html">בית</a></li>
-      <li><a href="chapters/chapter-01.html">הפרקים</a></li>
       <li><a href="about.html" class="active">אודות</a></li>
+      <li><a href="contact.html">צור קשר</a></li>
       <li>
         <select class="nav__chapter-select" aria-label="עבור לפרק">
           <option value="">עבור/י לפרק...</option>
@@ -27,9 +38,9 @@
           <option value="chapters/chapter-02.html">פרק 2 - המפגש בסהרה</option>
           <option value="chapters/chapter-03.html">פרק 3 - הכוכב הזעיר</option>
           <option value="chapters/chapter-04.html">פרק 4 - האסטרונום הטורקי</option>
-          <option value="" disabled>פרק 5 - עצי הבאובב (בקרוב)</option>
-          <option value="" disabled>פרק 6 - ארבעים וארבע שקיעות (בקרוב)</option>
-          <option value="" disabled>פרק 7 - קוצים ושושנים (בקרוב)</option>
+          <option value="chapters/chapter-05.html">פרק 5 - עצי הבאובב</option>
+          <option value="chapters/chapter-06.html">פרק 6 - ארבעים וארבע שקיעות</option>
+          <option value="chapters/chapter-07.html">פרק 7 - קוצים ושושנים</option>
           <option value="" disabled>פרק 8 - השושנה הגנדרנית (בקרוב)</option>
           <option value="" disabled>פרק 9 - הפרידה מהשושנה (בקרוב)</option>
           <option value="" disabled>פרק 10 - המלך (בקרוב)</option>
@@ -56,31 +67,39 @@
   </nav>
 </header>
 
+<div class="container breadcrumb">
+  <a href="index.html">בית</a> <span>/</span> אודות
+</div>
+
+<section class="hero chapter-banner">
+  <div class="hero__content">
+    <h1 class="hero-title chapter-banner__title">אודות</h1>
+    <img src="images/prince_orig.png" class="chapter-banner__illustration about-hero__illustration" alt="איור: הנסיך הקטן המקורי">
+    <div class="ornament chapter-banner__divider" aria-hidden="true">
+      <span class="ornament__line"></span>
+      <span class="ornament__star">&#10022;</span>
+      <span class="ornament__line"></span>
+    </div>
+  </div>
+</section>
+
 <main class="container about-page">
-  <h1>אודות הפרויקט</h1>
 
-  <div class="content-card">
+  <div class="chapter-banner__summary-text about-text">
     <p>
-      האתר נולד מתוך יחידת לימוד שהתקיימה בכיתה, ליוותה תלמידות ותלמידים לאורך שנתיים שלמות במסע קריאה איטי ומעמיק בעקבות
-      "הנסיך הקטן" מאת אנטואן דה סנט-אכזופרי - פרק אחר פרק, שיחה אחר שיחה.
+      ״הנסיך הקטן״, שכתב ואייר הסופר והטייס הצרפתי אנטואן דה סנט־אכזופרי, ראה אור לראשונה בשנת 1943. במסעו של ילד מכוכב זעיר מצליח הספר לגעת בשאלות גדולות על חברות, אהבה, אחריות, בדידות ועל הדברים החשובים באמת. הוא תורגם למאות שפות וניבים, וממשיך לעורר בקוראים צעירים ומבוגרים מחשבות חדשות בכל קריאה.
     </p>
     <p>
-      כל פרק באתר בנוי משילוב של שני מקורות: תיעוד אותנטי של הלמידה שהתקיימה בפועל בכיתה - תקצירי העלילה, השאלות שהוצגו
-      לתלמידים והתובנות שעלו בדיונים - יחד עם תוכנית העשרה רב-תחומית ועשירה, המציעה פעילויות יצירתיות החוצות בין
-      פילוסופיה, מדעים, אומנות, היסטוריה ותיאטרון.
+      מתוך העולם העשיר הזה נולדה תוכנית הלימודים שלנו - מסע שנתי, פעיל ורב־תחומי, המבוסס על תרגומה הנפלא של תלמה אליגון־רוז. בכל שבוע נקרא יחד פרק או שניים, וכל תחנה במסעו של הנסיך תפתח בפנינו דרך חדשה לחקור, ליצור, להתנסות ולשאול.
     </p>
     <p>
-      המטרה היא להנגיש את החוויה הזו למורים ולכיתות נוספות - כך שהמסע הפילוסופי והרגשי שספר קטן זה מזמין, ימשיך להאיר
-      עוד ועוד כיתות, "כי הדברים החשובים באמת סמויים מן העין".
+      כך ננווט בעזרת כוכב הצפון, נחקור את מדבר הסהרה ואת עצי הבאובב, נפגוש את חלוצי התעופה ונגלה מה קורה כשצועדים בקו ישר על פני כוכב עגול. נחבר בין ספרות, מדעים, מתמטיקה, אסטרונומיה, היסטוריה, אמנות, פילוסופיה וטכנולוגיה, ונשלב ניסויים, משימות חקר, יצירה, דיבייטים וסימולציות. לצד כל אלה נשאל גם שאלות על אושר, סטריאוטיפים, אחריות, קשרים ועל הדרך שבה אנחנו מביטים בעולם ובאנשים שסביבנו.
     </p>
     <p>
-      האתר נמצא בבנייה מתמשכת, ופרקים נוספים יתווספו בהדרגה.
+      באתר נציג את התחנות השונות במסע, את הפעילויות שנולדו מתוך הפרקים ואת הרעיונות והתוצרים שניצור בדרך. נקרא, נחקור, נתנסה ונגלה כמה רחוק אפשר להגיע כשלא הולכים רק ישר קדימה.
     </p>
   </div>
 
-  <div style="text-align:center; margin-top: 2rem;">
-    <a href="index.html" class="btn">חזרה לעמוד הבית</a>
-  </div>
 </main>
 
 <footer class="site-footer">
