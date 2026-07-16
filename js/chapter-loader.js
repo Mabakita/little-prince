@@ -104,6 +104,13 @@ function createParagraphElement(block) {
   return paragraph;
 }
 
+function createRichHtmlElement(html) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'activity-card__rich';
+  wrapper.innerHTML = html;
+  return wrapper;
+}
+
 function createFileSection(fileName) {
   const mediaBox = document.createElement('div');
   mediaBox.className = 'activity-card__file';
@@ -400,28 +407,41 @@ document.addEventListener('DOMContentLoaded', () => {
         : parseLegacyActivityBlocks(activity);
 
       contentBlocks.forEach((block) => {
-        if (block.type === 'paragraph') {
+        const blockType = typeof block.type === 'string' ? block.type.trim().toLowerCase() : '';
+
+        if (blockType === 'html' && block.html) {
+          card.appendChild(createRichHtmlElement(block.html));
+          return;
+        }
+
+        if (blockType === 'paragraph') {
           card.appendChild(createParagraphElement(block));
           return;
         }
 
-        if (block.type === 'file' && block.file) {
+        if (blockType === 'file' && block.file) {
           card.appendChild(createFileSection(block.file));
           return;
         }
 
-        if (block.type === 'video' && block.video) {
+        if (blockType === 'video' && block.video) {
           card.appendChild(createVideoSection(block.video, activity.title));
           return;
         }
 
-        if (block.type === 'image' && block.image) {
+        if (blockType === 'image' && block.image) {
           card.appendChild(createImageElement(block.image, activity.title, Boolean(block.small)));
           return;
         }
 
-        if (block.type === 'downloads' && Array.isArray(block.files) && block.files.length > 0) {
+        if (blockType === 'downloads' && Array.isArray(block.files) && block.files.length > 0) {
           card.appendChild(createDownloadsSection(block.files));
+          return;
+        }
+
+        // Fallback: if a block carries HTML but the type is unexpected, render it anyway.
+        if (block && block.html) {
+          card.appendChild(createRichHtmlElement(block.html));
         }
       });
 
