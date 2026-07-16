@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { chapterFile: 'chapter-05.html', menuLabel: 'פרק 5 - עצי הבאובב', cardNumber: 'פרק 5', cardTitle: 'עצי הבאובב', icon: '5', enabled: true },
     { chapterFile: 'chapter-06.html', menuLabel: 'פרק 6 - ארבעים וארבע שקיעות', cardNumber: 'פרק 6', cardTitle: 'ארבעים וארבע שקיעות', icon: '6', enabled: true },
     { chapterFile: 'chapter-07.html', menuLabel: 'פרק 7 - קוצים ושושנים', cardNumber: 'פרק 7', cardTitle: 'קוצים ושושנים', icon: '7', enabled: true },
-    { menuLabel: 'פרקים 8-9 - השושנה הגנדרנית (בקרוב)', cardNumber: 'פרקים 8-9', cardTitle: 'השושנה הגנדרנית', icon: '8', enabled: false },
+    { chapterFile: 'chapter-08.html', menuLabel: 'פרקים 8-9 - השושנה הגנדרנית', cardNumber: 'פרקים 8-9', cardTitle: 'השושנה הגנדרנית', icon: '8', enabled: true },
     { menuLabel: 'פרק 10 - המלך (בקרוב)', cardNumber: 'פרק 10', cardTitle: 'המלך', icon: '10', enabled: false },
     { menuLabel: 'פרק 11 - השחצן (בקרוב)', cardNumber: 'פרק 11', cardTitle: 'השחצן', icon: '11', enabled: false },
     { menuLabel: 'פרק 12 - השיכור (בקרוב)', cardNumber: 'פרק 12', cardTitle: 'השיכור', icon: '12', enabled: false },
