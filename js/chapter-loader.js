@@ -104,6 +104,29 @@ function createParagraphElement(block) {
   return paragraph;
 }
 
+function createDidYouKnowElement(text) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'did-you-know';
+
+  const icon = document.createElement('img');
+  icon.className = 'did-you-know__icon';
+  icon.src = '../images/did-you-know.png?v=20260717-2';
+  icon.alt = 'הידעת?';
+  icon.loading = 'lazy';
+  wrapper.appendChild(icon);
+
+  const textEl = document.createElement('p');
+  textEl.className = 'did-you-know__text';
+  const prefix = document.createElement('span');
+  prefix.className = 'did-you-know__prefix';
+  prefix.textContent = 'הידעת? ';
+  textEl.appendChild(prefix);
+  textEl.append(document.createTextNode(text || ''));
+  wrapper.appendChild(textEl);
+
+  return wrapper;
+}
+
 function createRichHtmlElement(html) {
   const wrapper = document.createElement('div');
   wrapper.className = 'activity-card__rich';
@@ -195,6 +218,12 @@ function createImageElement(imageName, activityTitle, isSmall = false) {
   } else {
     image.src = '../images/' + imageName;
   }
+
+  image.classList.add('activity-card__bottom-image--clickable');
+  image.setAttribute('title', 'לחצו לפתיחת התמונה בגודל מקורי');
+  image.addEventListener('click', () => {
+    window.open(image.src, '_blank', 'noopener,noreferrer');
+  });
 
   return image;
 }
@@ -360,12 +389,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const titleEl = document.getElementById('chapter-title');
+  const chapterNumber = String(chapter.number);
+  const chapterLabel = chapterNumber.includes('-') ? 'פרקים' : 'פרק';
+
   if (titleEl) {
-    titleEl.textContent = 'פרק ' + chapter.number + ': ' + chapter.name;
+    titleEl.textContent = chapterLabel + ' ' + chapterNumber + ': ' + chapter.name;
   }
 
   // Keep the browser-tab title synced with the rendered chapter heading.
-  document.title = 'פרק ' + chapter.number + ' - ' + chapter.name + ' | הנסיך הקטן';
+  document.title = chapterLabel + ' ' + chapterNumber + ' - ' + chapter.name + ' | הנסיך הקטן';
 
   let summaryEl = document.getElementById('chapter-summary');
   if (!summaryEl) {
@@ -399,49 +431,75 @@ document.addEventListener('DOMContentLoaded', () => {
       card.className = `activity-card ${colorClass}`;
 
       const h3 = document.createElement('h3');
-      h3.textContent = activity.title;
+      h3.textContent = 'פעילות ' + (index + 1) + ': ' + activity.title;
       card.appendChild(h3);
 
       const contentBlocks = Array.isArray(activity.content) && activity.content.length > 0
         ? activity.content
         : parseLegacyActivityBlocks(activity);
 
+      let pendingDidYouKnow = false;
+
       contentBlocks.forEach((block) => {
         const blockType = typeof block.type === 'string' ? block.type.trim().toLowerCase() : '';
 
+        if (blockType === 'didyouknow' && block.text) {
+          card.appendChild(createDidYouKnowElement(block.text));
+          pendingDidYouKnow = false;
+          return;
+        }
+
         if (blockType === 'html' && block.html) {
           card.appendChild(createRichHtmlElement(block.html));
+          pendingDidYouKnow = false;
           return;
         }
 
         if (blockType === 'paragraph') {
+          const paragraphText = (block.text || '').trim();
+          if (/^(🧠\s*)?הידעת(?:ם)?\??$/.test(paragraphText)) {
+            pendingDidYouKnow = true;
+            return;
+          }
+
+          if (pendingDidYouKnow && paragraphText) {
+            card.appendChild(createDidYouKnowElement(paragraphText));
+            pendingDidYouKnow = false;
+            return;
+          }
+
           card.appendChild(createParagraphElement(block));
           return;
         }
 
         if (blockType === 'file' && block.file) {
           card.appendChild(createFileSection(block.file));
+          pendingDidYouKnow = false;
           return;
         }
 
         if (blockType === 'video' && block.video) {
           card.appendChild(createVideoSection(block.video, activity.title));
+          pendingDidYouKnow = false;
           return;
         }
 
         if (blockType === 'image' && block.image) {
           card.appendChild(createImageElement(block.image, activity.title, Boolean(block.small)));
+          pendingDidYouKnow = false;
           return;
         }
 
         if (blockType === 'downloads' && Array.isArray(block.files) && block.files.length > 0) {
           card.appendChild(createDownloadsSection(block.files));
+          pendingDidYouKnow = false;
           return;
         }
 
         // Fallback: if a block carries HTML but the type is unexpected, render it anyway.
         if (block && block.html) {
           card.appendChild(createRichHtmlElement(block.html));
+          pendingDidYouKnow = false;
         }
       });
 

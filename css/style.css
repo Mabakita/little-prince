@@ -631,7 +631,7 @@ img.chapter-banner__illustration {
 .activities-stack {
   display: flex;
   flex-direction: column;
-  gap: 1.3rem;
+  gap: calc(1.3rem + 0.5cm);
 }
 
 .activity-card__file {
@@ -897,17 +897,67 @@ img.chapter-banner__illustration {
   margin-bottom: 0.35rem;
 }
 
+.did-you-know {
+  margin: 0.7rem 0 0.2rem;
+  display: flex;
+  flex-direction: row;
+  direction: rtl;
+  align-items: center;
+  gap: 0.9rem;
+  border: 1px solid rgba(74, 56, 38, 0.22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.8rem 0.3rem 0.8rem 1rem;
+  box-sizing: border-box;
+}
+
+.did-you-know__icon {
+  width: 6cm;
+  height: 6cm;
+  flex: 0 0 28%;
+  max-width: 28%;
+  object-fit: contain;
+  align-self: center;
+  transform: translateY(-12px);
+}
+
+.did-you-know__text {
+  direction: rtl;
+  text-align: justify;
+  flex: 1 1 0;
+  min-width: 0;
+  align-self: center;
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.did-you-know__prefix {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.6em;
+}
+
 .activity-card__bottom-image {
   display: block;
   width: 100%;
-  max-width: 420px;
+  max-width: 520px;
   height: auto;
-  margin: 1rem auto 0;
+  margin: 1rem auto 1cm;
 }
 
 .activity-card__bottom-image--small {
   width: 50%;
   max-width: 252px;
+}
+
+.activity-card__bottom-image--clickable {
+  cursor: zoom-in;
+}
+
+.activity-card__bottom-image--clickable:hover {
+  filter: brightness(1.02);
 }
 
 .activity-card__source {
@@ -927,7 +977,7 @@ img.chapter-banner__illustration {
 }
 
 .chapter-page .activity-card__bottom-image {
-  max-width: 504px;
+  max-width: 620px;
 }
 
 /* ---------- הורדות ---------- */
