@@ -831,7 +831,11 @@ img.chapter-banner__illustration {
 .activity-card p {
   font-size: 1.0925rem;
   color: var(--ink-soft);
-  margin: 0;
+  margin: 0 0 0.85rem;
+}
+
+.activity-card p:last-child {
+  margin-bottom: 0;
 }
 
 .activity-card__rich {
@@ -840,17 +844,30 @@ img.chapter-banner__illustration {
 }
 
 .activity-card__rich p {
-  margin: 0;
+  margin: 0 0 0.85rem;
+}
+
+.activity-card__rich p:last-child {
+  margin-bottom: 0;
+}
+
+.activity-card__rich p:has(> strong:only-child) {
+  margin-top: 1.15rem;
+  margin-bottom: 0.18rem;
+}
+
+.activity-card__rich p:has(> strong:only-child):first-child {
+  margin-top: 0;
 }
 
 .activity-card__rich ul {
-  margin: 0.35rem 0;
+  margin: 0.45rem 0 0.75rem;
   padding: 0;
   list-style: none;
 }
 
 .activity-card__rich ol {
-  margin: 0.35rem 0;
+  margin: 0.45rem 0 0.75rem;
   padding: 0;
   list-style: none;
   counter-reset: rich-ol;
