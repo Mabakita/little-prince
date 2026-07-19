@@ -320,6 +320,12 @@ function parseLegacyActivityBlocks(activity) {
 
   if (activity.description) {
     activity.description.forEach((paragraph) => {
+      const didYouKnowMatch = paragraph.match(/^הידעת\?\s*(.+)$/);
+      if (didYouKnowMatch) {
+        blocks.push({ type: 'didyouknow', text: didYouKnowMatch[1].trim() });
+        return;
+      }
+
       const fileMatch = paragraph.match(/^קובץ:\s*(.+)$/);
       if (fileMatch) {
         fallbackFile = fileMatch[1].trim();

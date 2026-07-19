@@ -344,6 +344,10 @@ body.page-cream {
   text-align: right;
 }
 
+.hero__intro + .hero__intro {
+  margin-top: 0.8rem;
+}
+
 /* ---------- כותרות מקטע - הרגשה של כתב יד ---------- */
 .section-title {
   font-family: var(--font-heading);
@@ -851,6 +855,10 @@ img.chapter-banner__illustration {
   margin-bottom: 0;
 }
 
+.activity-card__rich:not(:last-child) p:last-child {
+  margin-bottom: 0.78rem;
+}
+
 .activity-card__rich p:has(> strong:only-child) {
   margin-top: 1.15rem;
   margin-bottom: 0.18rem;
@@ -862,13 +870,13 @@ img.chapter-banner__illustration {
 
 .activity-card__rich ul {
   margin: 0.45rem 0 0.75rem;
-  padding: 0;
+  padding: 0.1rem 0.35rem 0 0;
   list-style: none;
 }
 
 .activity-card__rich ol {
   margin: 0.45rem 0 0.75rem;
-  padding: 0;
+  padding: 0.1rem 0.35rem 0 0;
   list-style: none;
   counter-reset: rich-ol;
 }
@@ -876,24 +884,24 @@ img.chapter-banner__illustration {
 .activity-card__rich li {
   display: block;
   position: relative;
-  padding-right: 1.2rem;
-  padding-inline-start: 1.2rem;
+  padding-right: 1.45rem;
+  padding-inline-start: 1.45rem;
   margin: 0.25rem 0;
 }
 
 .activity-card__rich ul li::before {
   content: "•";
   position: absolute;
-  right: 0;
-  inset-inline-start: 0;
+  right: 0.32rem;
+  inset-inline-start: 0.32rem;
 }
 
 .activity-card__rich ol li::before {
   counter-increment: rich-ol;
   content: counter(rich-ol) ".";
   position: absolute;
-  right: 0;
-  inset-inline-start: 0;
+  right: 0.32rem;
+  inset-inline-start: 0.32rem;
 }
 
 .activity-card__rich ul li::before,
@@ -915,45 +923,45 @@ img.chapter-banner__illustration {
 }
 
 .did-you-know {
-  margin: 0.7rem 0 0.2rem;
+  margin: 0.06rem 0 0.03rem;
   display: flex;
   flex-direction: row;
   direction: rtl;
   align-items: center;
-  gap: 0.9rem;
-  border: 1px solid rgba(74, 56, 38, 0.22);
+  gap: 0.35rem;
+  border: 1px solid rgba(212, 162, 78, 0.62);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.55);
-  padding: 0.8rem 0.3rem 0.8rem 1rem;
+  background: rgba(252, 242, 217, 0.76);
+  padding: 0.5cm 0.3rem 0.5cm 1rem;
   box-sizing: border-box;
 }
 
 .did-you-know__icon {
-  width: 6cm;
-  height: 6cm;
-  flex: 0 0 28%;
-  max-width: 28%;
+  width: 4.2cm;
+  height: 4.2cm;
+  flex: 0 0 20%;
+  max-width: 20%;
   object-fit: contain;
   align-self: center;
-  transform: translateY(-12px);
+  transform: translate(8px, -6px);
 }
 
 .did-you-know__text {
   direction: rtl;
   text-align: justify;
-  flex: 1 1 0;
+  flex: 1 1 80%;
   min-width: 0;
   align-self: center;
   margin: 0;
   color: var(--ink-soft);
-  line-height: 1.75;
+  line-height: 1.54;
   overflow-wrap: anywhere;
 }
 
 .did-you-know__prefix {
   color: var(--ink);
   font-weight: 700;
-  font-size: 1.6em;
+  font-size: 1.28em;
 }
 
 .activity-card__bottom-image {
