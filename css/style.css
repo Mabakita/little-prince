@@ -923,7 +923,7 @@ img.chapter-banner__illustration {
 }
 
 .did-you-know {
-  margin: 0.06rem 0 0.03rem;
+  margin: 0.02rem 0 0.02rem;
   display: flex;
   flex-direction: row;
   direction: rtl;
@@ -932,7 +932,7 @@ img.chapter-banner__illustration {
   border: 1px solid rgba(212, 162, 78, 0.62);
   border-radius: 14px;
   background: rgba(252, 242, 217, 0.76);
-  padding: 0.5cm 0.3rem 0.5cm 1rem;
+  padding: 0.18rem 0.45rem 0.26rem 0.9rem;
   box-sizing: border-box;
 }
 
