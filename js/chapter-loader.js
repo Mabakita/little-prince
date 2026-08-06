@@ -134,6 +134,13 @@ function createRichHtmlElement(html) {
   return wrapper;
 }
 
+function createActivitySeparatorElement() {
+  const separator = document.createElement('div');
+  separator.className = 'activity-card__separator';
+  separator.setAttribute('aria-hidden', 'true');
+  return separator;
+}
+
 function createFileSection(fileName) {
   const mediaBox = document.createElement('div');
   mediaBox.className = 'activity-card__file';
@@ -202,12 +209,17 @@ function createVideoSection(videoUrl, activityTitle) {
   return mediaBox;
 }
 
-function createImageElement(imageName, activityTitle, isSmall = false) {
+function createImageElement(imageName, activityTitle, isSmall = false, widthPercent = null) {
   const image = document.createElement('img');
   image.className = 'activity-card__bottom-image';
   if (isSmall) {
     image.classList.add('activity-card__bottom-image--small');
   }
+
+  if (typeof widthPercent === 'number' && widthPercent > 0 && widthPercent <= 100) {
+    image.style.width = widthPercent + '%';
+  }
+
   image.loading = 'lazy';
   image.alt = 'תמונה לפעילות: ' + activityTitle;
 
@@ -234,7 +246,7 @@ function createDownloadsSection(fileNames) {
 
   const downloadsTitle = document.createElement('h4');
   downloadsTitle.className = 'activity-card__downloads-title';
-  downloadsTitle.textContent = 'דפי פעילות להורדה';
+  downloadsTitle.textContent = 'דפי פעילות';
   downloadsSection.appendChild(downloadsTitle);
 
   const downloadsGrid = document.createElement('div');
@@ -248,61 +260,71 @@ function createDownloadsSection(fileNames) {
     const item = document.createElement('a');
     item.className = 'activity-card__download-item';
     item.href = fileUrl;
-    item.setAttribute('download', '');
+
+    if (isPdfDownload) {
+      item.target = '_blank';
+      item.rel = 'noopener noreferrer';
+      item.title = 'פתיחת דף הפעילות בחלון חדש';
+    } else {
+      item.setAttribute('download', '');
+    }
 
     const createImagePreviewThumb = () => {
       const thumb = document.createElement('img');
       thumb.className = 'activity-card__download-item-thumb';
-      thumb.src = '../downloads/worksheets/images/' + thumbBase + '.png';
+      thumb.src = '../downloads/worksheets/images/' + thumbBase + '.png?v=20260806-1';
       thumb.alt = 'תצוגה מקדימה של הקובץ: ' + fileName;
       thumb.loading = 'lazy';
       thumb.onerror = () => {
         if (!thumb.dataset.fallbackStep) {
           thumb.dataset.fallbackStep = 'worksheet-svg';
-          thumb.src = '../downloads/worksheets/images/' + thumbBase + '.svg';
+          thumb.src = '../downloads/worksheets/images/' + thumbBase + '.svg?v=20260806-1';
           return;
         }
 
         if (thumb.dataset.fallbackStep === 'worksheet-svg') {
           thumb.dataset.fallbackStep = 'legacy-png';
-          thumb.src = '../images/downloads-thumbs/' + thumbBase + '.png';
+          thumb.src = '../images/downloads-thumbs/' + thumbBase + '.png?v=20260806-1';
           return;
         }
 
         if (thumb.dataset.fallbackStep === 'legacy-png') {
           thumb.dataset.fallbackStep = 'legacy-svg';
-          thumb.src = '../images/downloads-thumbs/' + thumbBase + '.svg';
+          thumb.src = '../images/downloads-thumbs/' + thumbBase + '.svg?v=20260806-1';
           return;
         }
 
-        thumb.remove();
+        // Final fallback: keep a visible placeholder instead of removing the preview.
+        thumb.onerror = null;
+        const safeFileName = String(fileName).replace(/[&<>"']/g, (ch) => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[ch]));
+        const placeholderSvg = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360">
+            <rect width="360" height="360" rx="16" fill="#f7efe2"/>
+            <rect x="18" y="18" width="324" height="324" rx="12" fill="#fffaf1" stroke="#d9c6a7"/>
+            <path d="M134 96h68l52 52v116a12 12 0 0 1-12 12H134a12 12 0 0 1-12-12V108a12 12 0 0 1 12-12z" fill="#ffffff" stroke="#cdb48d"/>
+            <path d="M202 96v40a12 12 0 0 0 12 12h40" fill="none" stroke="#cdb48d"/>
+            <text x="180" y="208" text-anchor="middle" font-size="38" font-family="Arial" fill="#8f6f45" font-weight="700">PDF</text>
+            <text x="180" y="248" text-anchor="middle" font-size="16" font-family="Arial" fill="#6e5434">תצוגה מקדימה</text>
+            <text x="180" y="272" text-anchor="middle" font-size="14" font-family="Arial" fill="#6e5434">${safeFileName}</text>
+          </svg>
+        `;
+        thumb.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(placeholderSvg);
       };
 
       return thumb;
     };
 
-    if (isPdfDownload) {
-      const pdfPreviewWrap = document.createElement('div');
-      pdfPreviewWrap.className = 'activity-card__download-item-thumb activity-card__download-item-pdf-preview';
-
-      const pdfCanvas = document.createElement('canvas');
-      pdfCanvas.className = 'activity-card__download-item-canvas';
-      pdfCanvas.setAttribute('aria-label', 'תצוגה מקדימה לעמוד הראשון: ' + fileName);
-      pdfPreviewWrap.appendChild(pdfCanvas);
-      item.appendChild(pdfPreviewWrap);
-
-      renderPdfFirstPageToCanvas(pdfCanvas, fileUrl).then((rendered) => {
-        if (!rendered) {
-          pdfPreviewWrap.replaceWith(createImagePreviewThumb());
-        }
-      });
-    } else {
-      item.appendChild(createImagePreviewThumb());
-    }
+    item.appendChild(createImagePreviewThumb());
 
     const fileLabel = document.createElement('span');
     fileLabel.className = 'activity-card__download-item-name';
-    fileLabel.textContent = 'להורדה';
+    fileLabel.textContent = isPdfDownload ? 'לפתיחה' : 'להורדה';
     item.appendChild(fileLabel);
 
     downloadsGrid.appendChild(item);
@@ -349,7 +371,7 @@ function parseLegacyActivityBlocks(activity) {
         return;
       }
 
-      const downloadMatch = paragraph.match(/^דפי פעילות להורדה:\s*(.*)$/);
+      const downloadMatch = paragraph.match(/^ד[פף](?:י)? פעילות להורדה:\s*(.*)$/);
       if (downloadMatch) {
         const files = downloadMatch[1]
           .split(',')
@@ -358,6 +380,11 @@ function parseLegacyActivityBlocks(activity) {
         if (files.length > 0) {
           blocks.push({ type: 'downloads', files });
         }
+        return;
+      }
+
+      if (/^\s*_{3,}\s*$/.test(paragraph)) {
+        blocks.push({ type: 'separator' });
         return;
       }
 
@@ -491,13 +518,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (blockType === 'image' && block.image) {
-          card.appendChild(createImageElement(block.image, activity.title, Boolean(block.small)));
+          const widthPercent = typeof block.widthPercent === 'number' ? block.widthPercent : null;
+          card.appendChild(createImageElement(block.image, activity.title, Boolean(block.small), widthPercent));
           pendingDidYouKnow = false;
           return;
         }
 
         if (blockType === 'downloads' && Array.isArray(block.files) && block.files.length > 0) {
           card.appendChild(createDownloadsSection(block.files));
+          pendingDidYouKnow = false;
+          return;
+        }
+
+        if (blockType === 'separator') {
+          card.appendChild(createActivitySeparatorElement());
           pendingDidYouKnow = false;
           return;
         }
