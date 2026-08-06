@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { chapterFile: 'chapter-13.html', menuLabel: 'פרק 13 - איש העסקים', cardNumber: 'פרק 13', cardTitle: 'איש העסקים', icon: '13', enabled: true },
     { chapterFile: 'chapter-14.html', menuLabel: 'פרק 14 - מדליק הפנסים', cardNumber: 'פרק 14', cardTitle: 'מדליק הפנסים', icon: '14', enabled: true },
     { chapterFile: 'chapter-15.html', menuLabel: 'פרק 15 - הגיאוגרף', cardNumber: 'פרק 15', cardTitle: 'הגיאוגרף', icon: '15', enabled: true },
-    { menuLabel: 'פרק 16 - כדור הארץ (בקרוב)', cardNumber: 'פרק 16', cardTitle: 'כדור הארץ', icon: '16', enabled: false },
+    { chapterFile: 'chapter-16.html', menuLabel: 'פרק 16 - כדור הארץ', cardNumber: 'פרק 16', cardTitle: 'כדור הארץ', icon: '16', enabled: true },
     { chapterFile: 'chapter-17.html', menuLabel: 'פרק 17 - הנחש בסהרה ושיח על בדידות', cardNumber: 'פרק 17', cardTitle: 'הנחש בסהרה ושיח על בדידות', icon: '17', enabled: true },
     { chapterFile: 'chapter-18.html', menuLabel: 'פרקים 18-19 - קולות במספר', cardNumber: 'פרקים 18-19', cardTitle: 'קולות במספר', icon: '18', enabled: true },
     { chapterFile: 'chapter-20.html', menuLabel: 'פרקים 20-21 - גן השושנים והמפגש עם השועל', cardNumber: 'פרקים 20-21', cardTitle: 'גן השושנים והמפגש עם השועל', icon: '20', enabled: true },
