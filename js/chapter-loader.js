@@ -1,22 +1,32 @@
 function getYouTubeEmbedUrl(url) {
+  const videoId = getYouTubeVideoId(url);
+  return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : null;
+}
+
+function getYouTubeVideoId(url) {
   try {
-    const parsedUrl = new URL(url);
-    const host = parsedUrl.hostname.replace(/^www\./, '');
-    const embedBase = 'https://www.youtube.com/embed/';
+    const normalizedUrl = String(url || '')
+      .replace(/[\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, '')
+      .trim();
+    const parsedUrl = new URL(normalizedUrl);
+    const host = parsedUrl.hostname.replace(/^www\./, '').toLowerCase();
 
     if (host === 'youtu.be') {
       const videoId = parsedUrl.pathname.replace(/^\//, '');
-      return videoId ? embedBase + videoId : null;
+      return videoId || null;
     }
 
-    if (host === 'youtube.com' || host === 'm.youtube.com') {
+    if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'youtube-nocookie.com') {
       if (parsedUrl.pathname === '/watch') {
-        const videoId = parsedUrl.searchParams.get('v');
-        return videoId ? embedBase + videoId : null;
+        return parsedUrl.searchParams.get('v');
       }
 
       if (parsedUrl.pathname.startsWith('/embed/')) {
-        return parsedUrl.href;
+        return parsedUrl.pathname.split('/')[2] || null;
+      }
+
+      if (parsedUrl.pathname.startsWith('/shorts/')) {
+        return parsedUrl.pathname.split('/')[2] || null;
       }
     }
   } catch (error) {
@@ -189,10 +199,52 @@ function createFileSection(fileName) {
   return mediaBox;
 }
 
-function createVideoSection(videoUrl, activityTitle) {
+function createVideoSection(videoUrl, activityTitle, introText = '') {
   const mediaBox = document.createElement('div');
   mediaBox.className = 'activity-card__file';
-  const embedUrl = getYouTubeEmbedUrl(videoUrl);
+  const normalizedVideoUrl = String(videoUrl || '')
+    .replace(/[\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, '')
+    .trim();
+  const videoId = getYouTubeVideoId(normalizedVideoUrl);
+  const embedUrl = getYouTubeEmbedUrl(normalizedVideoUrl);
+  const hasHttpUrl = /^https?:\/\//i.test(normalizedVideoUrl);
+
+  const watchLink = document.createElement('a');
+  watchLink.className = 'activity-card__download activity-card__video-link';
+  watchLink.href = hasHttpUrl
+    ? normalizedVideoUrl
+    : 'https://www.youtube.com/results?search_query=' + encodeURIComponent(normalizedVideoUrl || activityTitle);
+  watchLink.target = '_blank';
+  watchLink.rel = 'noopener noreferrer';
+  watchLink.textContent = 'צפייה בסרטון ביוטיוב';
+
+  if (introText && introText.trim()) {
+    const intro = document.createElement('p');
+    intro.className = 'activity-card__video-intro';
+    intro.textContent = introText.trim();
+    mediaBox.appendChild(intro);
+  }
+
+  // In local file preview (file://), YouTube often blocks iframe playback (Error 153).
+  // Show a clickable thumbnail so preview remains useful.
+  if (videoId && window.location.protocol === 'file:') {
+    const thumbLink = document.createElement('a');
+    thumbLink.href = watchLink.href;
+    thumbLink.target = '_blank';
+    thumbLink.rel = 'noopener noreferrer';
+    thumbLink.className = 'activity-card__video-preview-link';
+
+    const thumb = document.createElement('img');
+    thumb.className = 'activity-card__video-preview-image';
+    thumb.loading = 'lazy';
+    thumb.alt = 'תצוגה מקדימה של הסרטון: ' + activityTitle;
+    thumb.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg';
+
+    thumbLink.appendChild(thumb);
+    mediaBox.appendChild(thumbLink);
+    mediaBox.appendChild(watchLink);
+    return mediaBox;
+  }
 
   if (embedUrl) {
     const videoFrame = document.createElement('iframe');
@@ -203,7 +255,14 @@ function createVideoSection(videoUrl, activityTitle) {
     videoFrame.referrerPolicy = 'strict-origin-when-cross-origin';
     videoFrame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     videoFrame.allowFullscreen = true;
+    videoFrame.loading = 'lazy';
     mediaBox.appendChild(videoFrame);
+    mediaBox.appendChild(watchLink);
+    return mediaBox;
+  }
+
+  if (normalizedVideoUrl) {
+    mediaBox.appendChild(watchLink);
   }
 
   return mediaBox;
@@ -255,19 +314,9 @@ function createDownloadsSection(fileNames) {
   fileNames.forEach((fileName) => {
     const fileUrl = '../downloads/worksheets/' + fileName;
     const thumbBase = fileName.replace(/\.[^.]+$/, '');
-    const isPdfDownload = /\.pdf$/i.test(fileName);
 
-    const item = document.createElement('a');
+    const item = document.createElement('div');
     item.className = 'activity-card__download-item';
-    item.href = fileUrl;
-
-    if (isPdfDownload) {
-      item.target = '_blank';
-      item.rel = 'noopener noreferrer';
-      item.title = 'פתיחת דף הפעילות בחלון חדש';
-    } else {
-      item.setAttribute('download', '');
-    }
 
     const createImagePreviewThumb = () => {
       const thumb = document.createElement('img');
@@ -339,12 +388,21 @@ function createDownloadsSection(fileNames) {
       return thumb;
     };
 
-    item.appendChild(createImagePreviewThumb());
+    const previewLink = document.createElement('a');
+    previewLink.className = 'activity-card__download-item-preview-link';
+    previewLink.href = fileUrl;
+    previewLink.setAttribute('download', '');
+    previewLink.setAttribute('aria-label', 'הורדת הקובץ: ' + fileName);
+    previewLink.appendChild(createImagePreviewThumb());
+    item.appendChild(previewLink);
 
-    const fileLabel = document.createElement('span');
-    fileLabel.className = 'activity-card__download-item-name';
-    fileLabel.textContent = isPdfDownload ? 'לפתיחה' : 'להורדה';
-    item.appendChild(fileLabel);
+    const downloadButton = document.createElement('a');
+    downloadButton.className = 'activity-card__download-item-button';
+    downloadButton.href = fileUrl;
+    downloadButton.setAttribute('download', '');
+    downloadButton.setAttribute('aria-label', 'הורדת הקובץ: ' + fileName);
+    downloadButton.textContent = 'הורדה';
+    item.appendChild(downloadButton);
 
     downloadsGrid.appendChild(item);
   });
@@ -358,10 +416,32 @@ function parseLegacyActivityBlocks(activity) {
   let fallbackFile = activity.file || null;
   let fallbackVideo = activity.video || null;
   let fallbackImage = activity.image || null;
+  let pendingVideoMarker = false;
+
+  const normalizeDocxLine = (value) => String(value || '')
+    .replace(/[\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, '')
+    .replace(/\u00A0/g, ' ')
+    .trim();
+
+  const looksLikeVideoUrl = (value) => /^(https?:\/\/|www\.)\S+/i.test(value);
 
   if (activity.description) {
-    activity.description.forEach((paragraph) => {
-      const didYouKnowMatch = paragraph.match(/^הידעת\?\s*(.+)$/);
+    activity.description.forEach((rawParagraph) => {
+      const paragraph = normalizeDocxLine(rawParagraph);
+
+      if (pendingVideoMarker && paragraph) {
+        if (looksLikeVideoUrl(paragraph)) {
+          const videoValue = paragraph.startsWith('www.') ? `https://${paragraph}` : paragraph;
+          fallbackVideo = videoValue;
+          blocks.push({ type: 'video', video: videoValue });
+          pendingVideoMarker = false;
+          return;
+        }
+
+        pendingVideoMarker = false;
+      }
+
+      const didYouKnowMatch = paragraph.match(/^הידעת[\?:]\s*(.+)$/);
       if (didYouKnowMatch) {
         blocks.push({ type: 'didyouknow', text: didYouKnowMatch[1].trim() });
         return;
@@ -374,9 +454,17 @@ function parseLegacyActivityBlocks(activity) {
         return;
       }
 
+      const videoMarkerOnlyMatch = paragraph.match(/^סרטון:\s*$/);
+      if (videoMarkerOnlyMatch) {
+        pendingVideoMarker = true;
+        return;
+      }
+
       const videoMatch = paragraph.match(/^סרטון:\s*(.+)$/);
       if (videoMatch) {
-        fallbackVideo = videoMatch[1].trim();
+        const rawVideoValue = normalizeDocxLine(videoMatch[1]);
+        const videoValue = rawVideoValue.startsWith('www.') ? `https://${rawVideoValue}` : rawVideoValue;
+        fallbackVideo = videoValue;
         blocks.push({ type: 'video', video: fallbackVideo });
         return;
       }
@@ -491,8 +579,12 @@ document.addEventListener('DOMContentLoaded', () => {
         : parseLegacyActivityBlocks(activity);
 
       let pendingDidYouKnow = false;
+      const normalizeMarkerText = (value) => String(value || '')
+        .replace(/[\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, '')
+        .replace(/\u00A0/g, ' ')
+        .trim();
 
-      contentBlocks.forEach((block) => {
+      contentBlocks.forEach((block, blockIndex) => {
         const blockType = typeof block.type === 'string' ? block.type.trim().toLowerCase() : '';
 
         if (blockType === 'didyouknow' && block.text) {
@@ -508,9 +600,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (blockType === 'paragraph') {
-          const paragraphText = (block.text || '').trim();
+          const paragraphText = normalizeMarkerText(block.text || '');
           if (/^(🧠\s*)?הידעת(?:ם)?\??$/.test(paragraphText)) {
             pendingDidYouKnow = true;
+            return;
+          }
+
+          const nextBlock = contentBlocks[blockIndex + 1] || null;
+          const nextBlockType = nextBlock && typeof nextBlock.type === 'string'
+            ? nextBlock.type.trim().toLowerCase()
+            : '';
+
+          if (nextBlockType === 'video' && paragraphText) {
+            if (nextBlock.introText && nextBlock.introText.trim()) {
+              nextBlock.introText = nextBlock.introText.trim() + ' ' + paragraphText;
+            } else {
+              nextBlock.introText = paragraphText;
+            }
             return;
           }
 
@@ -531,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (blockType === 'video' && block.video) {
-          card.appendChild(createVideoSection(block.video, activity.title));
+          card.appendChild(createVideoSection(block.video, activity.title, block.introText || ''));
           pendingDidYouKnow = false;
           return;
         }

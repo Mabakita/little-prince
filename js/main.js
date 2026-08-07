@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { chapterFile: 'chapter-18.html', menuLabel: 'פרקים 18-19 - קולות במספר', cardNumber: 'פרקים 18-19', cardTitle: 'קולות במספר', icon: '18', enabled: true },
     { chapterFile: 'chapter-20.html', menuLabel: 'פרקים 20-21 - גן השושנים והמפגש עם השועל', cardNumber: 'פרקים 20-21', cardTitle: 'גן השושנים והמפגש עם השועל', icon: '20', enabled: true },
     { chapterFile: 'chapter-22.html', menuLabel: 'פרקים 22-23 - פקיד הרכבת והרוכל', cardNumber: 'פרקים 22-23', cardTitle: 'פקיד הרכבת והרוכל', icon: '22', enabled: true },
-    { menuLabel: 'פרק 24 - הבאר (בקרוב)', cardNumber: 'פרק 24', cardTitle: 'הבאר', icon: '24', enabled: false },
-    { menuLabel: 'פרק 25 - דלי המים (בקרוב)', cardNumber: 'פרק 25', cardTitle: 'דלי המים', icon: '25', enabled: false },
+    { chapterFile: 'chapter-24.html', menuLabel: 'פרקים 24-25 - מים מן הבאר', cardNumber: 'פרקים 24-25', cardTitle: 'מים מן הבאר', icon: '24', enabled: true },
     { menuLabel: 'פרק 26 - הפרידה מן הנחש (בקרוב)', cardNumber: 'פרק 26', cardTitle: 'הפרידה מן הנחש', icon: '26', enabled: false },
     { menuLabel: 'פרק 27 - מבט אל הכוכבים (בקרוב)', cardNumber: 'פרק 27', cardTitle: 'מבט אל הכוכבים', icon: '27', enabled: false }
   ];
