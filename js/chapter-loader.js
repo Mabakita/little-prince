@@ -294,27 +294,46 @@ function createDownloadsSection(fileNames) {
           return;
         }
 
-        // Final fallback: keep a visible placeholder instead of removing the preview.
         thumb.onerror = null;
-        const safeFileName = String(fileName).replace(/[&<>"']/g, (ch) => ({
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#39;'
-        }[ch]));
-        const placeholderSvg = `
-          <svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360">
-            <rect width="360" height="360" rx="16" fill="#f7efe2"/>
-            <rect x="18" y="18" width="324" height="324" rx="12" fill="#fffaf1" stroke="#d9c6a7"/>
-            <path d="M134 96h68l52 52v116a12 12 0 0 1-12 12H134a12 12 0 0 1-12-12V108a12 12 0 0 1 12-12z" fill="#ffffff" stroke="#cdb48d"/>
-            <path d="M202 96v40a12 12 0 0 0 12 12h40" fill="none" stroke="#cdb48d"/>
-            <text x="180" y="208" text-anchor="middle" font-size="38" font-family="Arial" fill="#8f6f45" font-weight="700">PDF</text>
-            <text x="180" y="248" text-anchor="middle" font-size="16" font-family="Arial" fill="#6e5434">תצוגה מקדימה</text>
-            <text x="180" y="272" text-anchor="middle" font-size="14" font-family="Arial" fill="#6e5434">${safeFileName}</text>
-          </svg>
-        `;
-        thumb.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(placeholderSvg);
+
+        if (isPdfDownload) {
+          const canvas = document.createElement('canvas');
+          canvas.className = 'activity-card__download-item-thumb';
+          canvas.setAttribute('aria-label', 'תצוגה מקדימה של הקובץ: ' + fileName);
+
+          renderPdfFirstPageToCanvas(canvas, fileUrl).then((rendered) => {
+            if (rendered) {
+              thumb.replaceWith(canvas);
+              return;
+            }
+
+            // If runtime PDF rendering fails, keep a visible placeholder.
+            const safeFileName = String(fileName).replace(/[&<>"']/g, (ch) => ({
+              '&': '&amp;',
+              '<': '&lt;',
+              '>': '&gt;',
+              '"': '&quot;',
+              "'": '&#39;'
+            }[ch]));
+            const placeholderSvg = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360">
+                <rect width="360" height="360" rx="16" fill="#f7efe2"/>
+                <rect x="18" y="18" width="324" height="324" rx="12" fill="#fffaf1" stroke="#d9c6a7"/>
+                <path d="M134 96h68l52 52v116a12 12 0 0 1-12 12H134a12 12 0 0 1-12-12V108a12 12 0 0 1 12-12z" fill="#ffffff" stroke="#cdb48d"/>
+                <path d="M202 96v40a12 12 0 0 0 12 12h40" fill="none" stroke="#cdb48d"/>
+                <text x="180" y="208" text-anchor="middle" font-size="38" font-family="Arial" fill="#8f6f45" font-weight="700">PDF</text>
+                <text x="180" y="248" text-anchor="middle" font-size="16" font-family="Arial" fill="#6e5434">תצוגה מקדימה</text>
+                <text x="180" y="272" text-anchor="middle" font-size="14" font-family="Arial" fill="#6e5434">${safeFileName}</text>
+              </svg>
+            `;
+            thumb.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(placeholderSvg);
+          });
+
+          return;
+        }
+
+        // Final fallback for non-PDF files.
+        thumb.remove();
       };
 
       return thumb;
