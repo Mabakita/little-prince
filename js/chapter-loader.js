@@ -314,6 +314,7 @@ function createDownloadsSection(fileNames) {
   fileNames.forEach((fileName) => {
     const fileUrl = '../downloads/worksheets/' + fileName;
     const thumbBase = fileName.replace(/\.[^.]+$/, '');
+    const isPdfDownload = /\.pdf$/i.test(fileName);
 
     const item = document.createElement('div');
     item.className = 'activity-card__download-item';
@@ -391,7 +392,8 @@ function createDownloadsSection(fileNames) {
     const previewLink = document.createElement('a');
     previewLink.className = 'activity-card__download-item-preview-link';
     previewLink.href = fileUrl;
-    previewLink.setAttribute('download', '');
+    previewLink.target = '_blank';
+    previewLink.rel = 'noopener noreferrer';
     previewLink.setAttribute('aria-label', 'הורדת הקובץ: ' + fileName);
     previewLink.appendChild(createImagePreviewThumb());
     item.appendChild(previewLink);
@@ -399,7 +401,8 @@ function createDownloadsSection(fileNames) {
     const downloadButton = document.createElement('a');
     downloadButton.className = 'activity-card__download-item-button';
     downloadButton.href = fileUrl;
-    downloadButton.setAttribute('download', '');
+    downloadButton.target = '_blank';
+    downloadButton.rel = 'noopener noreferrer';
     downloadButton.setAttribute('aria-label', 'הורדת הקובץ: ' + fileName);
     downloadButton.textContent = 'הורדה';
     item.appendChild(downloadButton);
