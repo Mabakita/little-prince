@@ -655,6 +655,15 @@ img.chapter-banner__illustration {
   gap: 1rem;
 }
 
+.activity-card__video-wrap {
+  margin-top: 0.35rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
 .activity-card__file-thumb {
   width: 100%;
   max-width: 380px;
@@ -910,6 +919,16 @@ img.chapter-banner__illustration {
   color: var(--ink-soft);
 }
 
+.activity-card__rich strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.activity-card__rich span[style*="font-weight:900"] {
+  font-weight: 900 !important;
+  color: var(--ink) !important;
+}
+
 .activity-card__rich p {
   margin: 0 0 0.85rem;
 }
@@ -986,7 +1005,7 @@ img.chapter-banner__illustration {
 }
 
 .did-you-know {
-  margin: 0.02rem 0 0.02rem;
+  margin: calc(0.02rem + 1cm) 0 0.02rem;
   display: flex;
   flex-direction: row;
   direction: rtl;
@@ -1016,9 +1035,14 @@ img.chapter-banner__illustration {
   min-width: 0;
   align-self: center;
   margin: 0;
+  padding: 0.5cm;
   color: var(--ink-soft);
   line-height: 1.54;
   overflow-wrap: anywhere;
+}
+
+.did-you-know + p {
+  margin-top: 1cm;
 }
 
 .did-you-know__prefix {

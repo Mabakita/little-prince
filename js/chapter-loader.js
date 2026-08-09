@@ -114,9 +114,15 @@ function createParagraphElement(block) {
   return paragraph;
 }
 
-function createDidYouKnowElement(text) {
+function createDidYouKnowElement(text, topMargin = '', bottomMargin = '') {
   const wrapper = document.createElement('div');
   wrapper.className = 'did-you-know';
+  if (topMargin) {
+    wrapper.style.marginTop = topMargin;
+  }
+  if (bottomMargin) {
+    wrapper.style.marginBottom = bottomMargin;
+  }
 
   const icon = document.createElement('img');
   icon.className = 'did-you-know__icon';
@@ -137,10 +143,16 @@ function createDidYouKnowElement(text) {
   return wrapper;
 }
 
-function createRichHtmlElement(html) {
+function createRichHtmlElement(html, topMargin = '', bottomMargin = '') {
   const wrapper = document.createElement('div');
   wrapper.className = 'activity-card__rich';
   wrapper.innerHTML = html;
+  if (topMargin) {
+    wrapper.style.marginTop = topMargin;
+  }
+  if (bottomMargin) {
+    wrapper.style.marginBottom = bottomMargin;
+  }
   return wrapper;
 }
 
@@ -199,13 +211,15 @@ function createFileSection(fileName) {
   return mediaBox;
 }
 
-function createVideoSection(videoUrl, activityTitle, introText = '') {
+function createVideoSection(videoUrl, activityTitle, introText = '', topMargin = '') {
   const mediaBox = document.createElement('div');
-  mediaBox.className = 'activity-card__file';
+  mediaBox.className = 'activity-card__video-wrap';
+  if (topMargin) {
+    mediaBox.style.marginTop = topMargin;
+  }
   const normalizedVideoUrl = String(videoUrl || '')
     .replace(/[\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, '')
     .trim();
-  const videoId = getYouTubeVideoId(normalizedVideoUrl);
   const embedUrl = getYouTubeEmbedUrl(normalizedVideoUrl);
   const hasHttpUrl = /^https?:\/\//i.test(normalizedVideoUrl);
 
@@ -223,27 +237,6 @@ function createVideoSection(videoUrl, activityTitle, introText = '') {
     intro.className = 'activity-card__video-intro';
     intro.textContent = introText.trim();
     mediaBox.appendChild(intro);
-  }
-
-  // In local file preview (file://), YouTube often blocks iframe playback (Error 153).
-  // Show a clickable thumbnail so preview remains useful.
-  if (videoId && window.location.protocol === 'file:') {
-    const thumbLink = document.createElement('a');
-    thumbLink.href = watchLink.href;
-    thumbLink.target = '_blank';
-    thumbLink.rel = 'noopener noreferrer';
-    thumbLink.className = 'activity-card__video-preview-link';
-
-    const thumb = document.createElement('img');
-    thumb.className = 'activity-card__video-preview-image';
-    thumb.loading = 'lazy';
-    thumb.alt = 'תצוגה מקדימה של הסרטון: ' + activityTitle;
-    thumb.src = 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg';
-
-    thumbLink.appendChild(thumb);
-    mediaBox.appendChild(thumbLink);
-    mediaBox.appendChild(watchLink);
-    return mediaBox;
   }
 
   if (embedUrl) {
@@ -268,11 +261,15 @@ function createVideoSection(videoUrl, activityTitle, introText = '') {
   return mediaBox;
 }
 
-function createImageElement(imageName, activityTitle, isSmall = false, widthPercent = null) {
+function createImageElement(imageName, activityTitle, isSmall = false, widthPercent = null, topMargin = '') {
   const image = document.createElement('img');
   image.className = 'activity-card__bottom-image';
   if (isSmall) {
     image.classList.add('activity-card__bottom-image--small');
+  }
+
+  if (topMargin) {
+    image.style.marginTop = topMargin;
   }
 
   if (typeof widthPercent === 'number' && widthPercent > 0 && widthPercent <= 100) {
@@ -322,25 +319,25 @@ function createDownloadsSection(fileNames) {
     const createImagePreviewThumb = () => {
       const thumb = document.createElement('img');
       thumb.className = 'activity-card__download-item-thumb';
-      thumb.src = '../downloads/worksheets/images/' + thumbBase + '.png?v=20260806-1';
+      thumb.src = '../downloads/worksheets/images/' + thumbBase + '.png?v=20260809-1';
       thumb.alt = 'תצוגה מקדימה של הקובץ: ' + fileName;
       thumb.loading = 'lazy';
       thumb.onerror = () => {
         if (!thumb.dataset.fallbackStep) {
           thumb.dataset.fallbackStep = 'worksheet-svg';
-          thumb.src = '../downloads/worksheets/images/' + thumbBase + '.svg?v=20260806-1';
+          thumb.src = '../downloads/worksheets/images/' + thumbBase + '.svg?v=20260809-1';
           return;
         }
 
         if (thumb.dataset.fallbackStep === 'worksheet-svg') {
           thumb.dataset.fallbackStep = 'legacy-png';
-          thumb.src = '../images/downloads-thumbs/' + thumbBase + '.png?v=20260806-1';
+          thumb.src = '../images/downloads-thumbs/' + thumbBase + '.png?v=20260809-1';
           return;
         }
 
         if (thumb.dataset.fallbackStep === 'legacy-png') {
           thumb.dataset.fallbackStep = 'legacy-svg';
-          thumb.src = '../images/downloads-thumbs/' + thumbBase + '.svg?v=20260806-1';
+          thumb.src = '../images/downloads-thumbs/' + thumbBase + '.svg?v=20260809-1';
           return;
         }
 
@@ -591,13 +588,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const blockType = typeof block.type === 'string' ? block.type.trim().toLowerCase() : '';
 
         if (blockType === 'didyouknow' && block.text) {
-          card.appendChild(createDidYouKnowElement(block.text));
+          card.appendChild(createDidYouKnowElement(block.text, block.topMargin || '', block.bottomMargin || ''));
           pendingDidYouKnow = false;
           return;
         }
 
         if (blockType === 'html' && block.html) {
-          card.appendChild(createRichHtmlElement(block.html));
+          card.appendChild(createRichHtmlElement(block.html, block.topMargin || '', block.bottomMargin || ''));
           pendingDidYouKnow = false;
           return;
         }
@@ -640,14 +637,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (blockType === 'video' && block.video) {
-          card.appendChild(createVideoSection(block.video, activity.title, block.introText || ''));
+          card.appendChild(createVideoSection(block.video, activity.title, block.introText || '', block.topMargin || ''));
           pendingDidYouKnow = false;
           return;
         }
 
         if (blockType === 'image' && block.image) {
           const widthPercent = typeof block.widthPercent === 'number' ? block.widthPercent : null;
-          card.appendChild(createImageElement(block.image, activity.title, Boolean(block.small), widthPercent));
+          card.appendChild(createImageElement(block.image, activity.title, Boolean(block.small), widthPercent, block.topMargin || ''));
           pendingDidYouKnow = false;
           return;
         }
@@ -666,7 +663,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Fallback: if a block carries HTML but the type is unexpected, render it anyway.
         if (block && block.html) {
-          card.appendChild(createRichHtmlElement(block.html));
+          card.appendChild(createRichHtmlElement(block.html, block.topMargin || '', block.bottomMargin || ''));
           pendingDidYouKnow = false;
         }
       });
