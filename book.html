@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>על הספר - הנסיך הקטן</title>
+<meta name="description" content="על הספר הנסיך הקטן, מחברו אנטואן דה סנט־אכזופרי והסיפור שמאחוריו.">
+<link rel="stylesheet" href="css/style.css?v=20260723-1">
+<style>
+  img.chapter-banner__illustration.about-hero__illustration {
+    height: auto !important;
+    width: min(74%, 318px) !important;
+    max-width: min(74%, 318px) !important;
+    margin: 0.25cm auto !important;
+  }
+
+  .page-cream .about-hero__illustration {
+    height: auto !important;
+    max-width: min(74%, 318px) !important;
+    margin: 0.25cm auto !important;
+  }
+
+  .page-cream .chapter-banner + main.about-page {
+    margin-top: calc(0.6rem - 1cm) !important;
+  }
+
+  .page-cream .chapter-banner__divider {
+    margin-top: 0.65rem !important;
+    margin-bottom: 0.9rem !important;
+  }
+
+  .about-inline-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1cm;
+    margin: 0.8rem 0 1.1rem;
+  }
+
+  .about-inline-gallery img {
+    width: min(38vw, 295px);
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid rgba(74, 56, 38, 0.16);
+    box-shadow: var(--shadow-soft);
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media (max-width: 700px) {
+    .about-inline-gallery {
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .about-inline-gallery img {
+      width: min(88vw, 320px);
+    }
+  }
+
+  .about-book-video {
+    margin: calc(1.5rem + 3cm) auto 0.5rem;
+    max-width: 860px;
+  }
+
+  .about-book-video iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 320px;
+    height: auto;
+    border: 1px solid rgba(74, 56, 38, 0.18);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    background: rgba(255, 255, 255, 0.55);
+  }
+
+  .about-book-video__link {
+    margin: 0.6rem 0 0;
+    text-align: center;
+  }
+
+  .about-book-video__link a {
+    color: var(--gold-deep);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+</style>
+</head>
+<body class="page-cream">
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      הנסיך הקטן
+      <span class="nav__logo-star">&#10022;</span>
+    </a>
+    <button class="nav__toggle" aria-label="פתח תפריט" aria-expanded="false">&#9776;</button>
+    <ul class="nav__links">
+      <li><a href="index.html">בית</a></li>
+      <li><a href="about.html">על התכנית</a></li>
+      <li><a href="book.html" class="active">על הספר</a></li>
+      <li><a href="contact.html">צור קשר</a></li>
+      <li>
+        <select class="nav__chapter-select" aria-label="עבור לפרק">
+          <option value="">עבור/י לפרק...</option>
+
+        </select>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container breadcrumb">
+  <a href="index.html">בית</a> <span>/</span> על הספר
+</div>
+
+<section class="hero chapter-banner">
+  <div class="hero__content">
+    <h1 class="hero-title chapter-banner__title">על הספר</h1>
+    <img src="images/pilot.png" class="chapter-banner__illustration about-hero__illustration" style="max-width:min(74%, 318px);" alt="איור טייס מתוך הספר">
+    <div class="chapter-banner__summary-text about-text">
+      <p>
+        ״הנסיך הקטן״ הוא אחד הספרים האהובים והמוכרים בעולם. במבט ראשון זהו סיפור פשוט על טייס שמטוסו מתקלקל במדבר ופוגש ילד מסתורי שהגיע מכוכב קטן. אבל מאחורי המסע בין הכוכבים מסתתרות שאלות גדולות על חברות ואהבה, אחריות ובדידות, עולם המבוגרים והדברים החשובים באמת.
+      </p>
+    </div>
+    <div class="ornament chapter-banner__divider" aria-hidden="true">
+      <span class="ornament__line"></span>
+      <span class="ornament__star">&#10022;</span>
+      <span class="ornament__line"></span>
+    </div>
+  </div>
+</section>
+
+<main class="container about-page">
+
+  <div class="chapter-banner__summary-text about-text">
+    <h2>האיש שמאחורי הנסיך הקטן</h2>
+    <p>
+      אנטואן דה סנט־אכזופרי (1900–1944) היה סופר, עיתונאי, מאייר וטייס צרפתי. הוא חי בתקופה שבה הטיסה עדיין הייתה הרפתקה מסוכנת, והיה מחלוצי טיסות הדואר האווירי. במסגרת עבודתו טס מעל מדבר סהרה ובדרום אמריקה, לעיתים במסלולים קשים ובתנאים קיצוניים. השעות הארוכות בשמיים, תחושת הבדידות, הסכנות שחווה והחברויות שנוצרו בין הטייסים השפיעו עמוקות על כתיבתו.
+    </p>
+    <p>
+      נושאים כמו אומץ, אחריות, קשר בין בני אדם והחיפוש אחר משמעות הופיעו ביצירותיו עוד לפני שכתב את ״הנסיך הקטן״.
+    </p>
+
+    <div class="about-inline-gallery" aria-label="תמונות מחייו של אנטואן דה סנט־אכזופרי">
+      <img src="images/plane.jpeg" alt="מטוס מתקופת הטיסות של סנט־אכזופרי">
+      <img src="images/writer.jpeg" alt="תצלום של אנטואן דה סנט־אכזופרי">
+    </div>
+
+    <h2>כשהמציאות הפכה לסיפור</h2>
+    <p>
+      בשנת 1935, במהלך ניסיון לשבור את שיא הטיסה מפריז לסייגון, התרסק מטוסו של סנט־אכזופרי בלב מדבר סהרה. הוא והמכונאי שטס עמו שרדו כמה ימים כמעט ללא מים, עד שחולצו. קשה שלא לזהות את עקבות החוויה הזו בפתיחת ״הנסיך הקטן״: טייס שמטוסו מתקלקל בלב המדבר, הרחק מכל יישוב, פוגש לפתע ילד מסתורי שמבקש ממנו לצייר כבשה.
+    </p>
+    <p>
+      הספר אינו תיאור של האירוע האמיתי, אבל המדבר, המטוס, הבדידות והמפגש עם הלא־נודע הגיעו מעולם שסנט־אכזופרי הכיר היטב.
+    </p>
+
+    <h2>הספר שנכתב הרחק מהבית</h2>
+    <p>
+      במהלך מלחמת העולם השנייה, לאחר נפילת צרפת, עבר סנט־אכזופרי לארצות הברית. רחוק ממולדתו, בתקופה של מלחמה וגעגועים לבית, כתב ואייר בניו יורק את ״הנסיך הקטן״. הספר ראה אור בניו יורק בשנת 1943, בצרפתית ובאנגלית.
+    </p>
+    <p>
+      בצרפת עצמה הוא פורסם רק בשנת 1946, כשנתיים לאחר מותו של סנט־אכזופרי. אולי אין זה מקרי שספר שנכתב הרחק מן הבית עוסק כל כך הרבה בפרידה, בגעגוע, בקשרים שאנחנו יוצרים ובשאלה מה הופך מקום - או אדם - ליקר לנו.
+    </p>
+
+    <h2>הטיסה האחרונה</h2>
+    <p>
+      גם לאחר שהתפרסם כסופר, סנט־אכזופרי לא ויתר על הטיסה. ב־31 ביולי 1944 המריא מקורסיקה למשימת צילום מעל דרום צרפת - ולא חזר. במשך יותר מחמישים שנה נותר גורלו בגדר תעלומה. בסוף שנות התשעים נמצא בים צמיד שנשא את שמו, ובהמשך אותרו גם שרידי מטוסו סמוך לחופי מרסיי.
+    </p>
+    <p>
+      סנט־אכזופרי היה בן 44 בלבד. הוא לא זכה לראות כיצד הספר הקטן שכתב הופך לאחת היצירות האהובות בעולם.
+    </p>
+
+    <h2>ספר שאין לו גיל</h2>
+    <p>
+      מאז פרסומו נמכר ״הנסיך הקטן״ במאות מיליוני עותקים ותורגם למאות שפות וניבים. אולי סוד כוחו טמון בכך שאין לו גיל אחד. ילדים יכולים לקרוא בו סיפור על נסיך קטן, שועל, שושנה, נחש וכוכבים רחוקים; מבוגרים מוצאים באותם מפגשים שאלות על אהבה ואובדן, חברות ובדידות, אחריות ומשמעות.
+    </p>
+    <p>
+      יותר משמונים שנה לאחר שנכתב, ״הנסיך הקטן״ עדיין מצליח לעשות דבר נדיר: לגרום לילדים ולמבוגרים לעצור לרגע, להתבונן בעולם המוכר בעיניים אחרות - ולשאול מחדש מה באמת חשוב.
+    </p>
+  </div>
+
+  <section class="about-book-video" aria-label="סרטון על הספר">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/A0wNMvPU16o?rel=0"
+      title="סרטון על הספר הנסיך הקטן"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
+    <p class="about-book-video__link">
+      <a href="https://www.youtube.com/watch?v=A0wNMvPU16o" target="_blank" rel="noopener noreferrer">לצפייה ביוטיוב</a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>אתר לימודי בהשראת "הנסיך הקטן" מאת אנטואן דה סנט-אכזופרי &middot; נבנה על ידי מורה, עבור מורים ותלמידים</p>
+</footer>
+
+<script src="js/main.js?v=20260808-3"></script>
+</body>
+</html>
