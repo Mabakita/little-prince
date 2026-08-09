@@ -18,15 +18,45 @@
   }
 
   .about-program-cover {
-    margin: calc(2rem + 1cm) auto 0.4rem;
+    margin: 0.35rem auto 0.4rem;
     display: flex;
     justify-content: center;
   }
 
+  .about-program-cover a {
+    display: block;
+    width: min(100%, 780px);
+  }
+
   .about-program-cover img {
-    width: min(62.1vw, 274px);
+    width: 100%;
+    max-width: 780px;
     height: auto;
     display: block;
+    border-radius: 12px;
+    border: 1px solid rgba(74, 56, 38, 0.16);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .about-program-caption {
+    margin: 2cm auto 0.2rem;
+    max-width: 760px;
+    text-align: right;
+    color: var(--ink-soft);
+    font-size: 1.06rem;
+    line-height: 1.6;
+  }
+
+  .about-inline-book {
+    margin: 1cm auto;
+    max-width: min(72vw, 320px);
+  }
+
+  .about-inline-book img {
+    width: 70%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
     border-radius: 12px;
     border: 1px solid rgba(74, 56, 38, 0.16);
     box-shadow: var(--shadow-soft);
@@ -37,9 +67,8 @@
 
 <header class="site-header">
   <nav class="nav">
-    <a href="index.html" class="nav__logo">
-      הנסיך הקטן
-      <span class="nav__logo-star">&#10022;</span>
+    <a href="https://www.facebook.com/ByInbalTal" class="nav__logo" target="_blank" rel="noopener noreferrer">
+      <img src="images/logo.png" alt="הנסיך הקטן">
     </a>
     <button class="nav__toggle" aria-label="פתח תפריט" aria-expanded="false">&#9776;</button>
     <ul class="nav__links">
@@ -79,6 +108,9 @@
     <p>
       ״הנסיך הקטן״ מזמין את קוראיו למסע בין כוכבים רחוקים ושאלות קרובות מאוד על חברות, אהבה, אחריות, בדידות ועל הדברים החשובים באמת. מתוך העולם העשיר הזה נולדה תוכנית לימודים שנתית, פעילה ורב־תחומית, המבוססת על תרגומה הנפלא של תלמה אליגון־רוז.
     </p>
+    <div class="about-inline-book">
+      <img src="images/bookCover.jpeg" alt="עטיפת הספר הנסיך הקטן">
+    </div>
     <p>
       התוכנית מיועדת בעיקר לתלמידי כיתות ד׳–ו׳, ולמורות ולמורים המבקשים להפוך את הקריאה בספר לנקודת מוצא ללמידה רחבה, סקרנית ומשמעותית. אפשר ללמד אותה כתוכנית שנתית מלאה, לבחור מתוכה פרקים ופעילויות, או להתאים אותה לגיל התלמידים, לתחומי העניין של הכיתה ולקצב הלמידה.
     </p>
@@ -99,8 +131,14 @@
     </p>
   </div>
 
+  <p class="about-program-caption">
+    מפת המסע שלפניכם מציגה את התחנות שילוו אותנו לאורך הספר - ואת השאלות, הרעיונות והעולמות שנפתחים בכל אחת מהן.
+  </p>
+
   <div class="about-program-cover">
-    <img src="images/bookCover.jpeg" alt="עטיפת הספר הנסיך הקטן">
+    <a href="images/theJourney.jpg" target="_blank" rel="noopener noreferrer">
+      <img src="images/theJourney.jpg" alt="מפת המסע של התכנית">
+    </a>
   </div>
 
 </main>

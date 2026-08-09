@@ -110,7 +110,7 @@ img.illustration {
   direction: ltr;
   align-items: center;
   justify-content: space-between;
-  padding: 0.9rem 1.5rem;
+  padding: 0.18rem 1.5rem;
 }
 
 .nav__logo {
@@ -120,7 +120,13 @@ img.illustration {
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  min-height: 62px;
+}
+
+.nav__logo img {
+  display: block;
+  height: 62px;
+  width: auto;
 }
 
 .nav__logo-star {
@@ -277,6 +283,16 @@ body.page-cream {
 }
 
 @media (max-width: 640px) {
+  .hero {
+    height: auto;
+    min-height: 0;
+    padding: 1.5rem 1.5rem 2.4rem;
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+
   .hero__prince {
     position: static;
     width: 228px;
@@ -348,6 +364,13 @@ body.page-cream {
   margin-top: 0.8rem;
 }
 
+@media (max-width: 640px) {
+  .hero__intro {
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
 /* ---------- כותרות מקטע - הרגשה של כתב יד ---------- */
 .section-title {
   font-family: var(--font-heading);
@@ -380,7 +403,7 @@ body.page-cream {
 
 @media (max-width: 640px) {
   .chapters-section .container {
-    margin-top: -12px;
+    margin-top: 0;
   }
 }
 
